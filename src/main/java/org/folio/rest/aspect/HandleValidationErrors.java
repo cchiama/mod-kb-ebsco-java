@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
  * exception will be caught and 400 error will be returned with exception message
  * wrapped into json according to jsonapi.
  */
-@Target( { ElementType.METHOD })
+@Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface HandleValidationErrors {

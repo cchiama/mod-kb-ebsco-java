@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 
 public class TitleConverter {
 
-  private static final TitleRelationShip EMPTY_PACKAGE_RELATIONSHIP = new TitleRelationShip()
+  private static final TitleRelationShip EMPTY_RESOURCES_RELATIONSHIP = new TitleRelationShip()
     .withResources(new MetaIncluded().withMeta(
       new MetaDataIncluded()
         .withIncluded(false)));
@@ -58,19 +58,19 @@ public class TitleConverter {
   }
 
   public TitleCollection convert(Titles titles) {
-    List<org.folio.rest.jaxrs.model.Titles> providerList = titles.getTitleList().stream()
+    List<org.folio.rest.jaxrs.model.Titles> titleList = titles.getTitleList().stream()
       .map(this::convertTitle)
       .collect(Collectors.toList());
     return new TitleCollection()
       .withJsonapi(RestConstants.JSONAPI)
       .withMeta(new MetaTotalResults().withTotalResults(titles.getTotalResults()))
-      .withData(providerList);
+      .withData(titleList);
   }
 
   private org.folio.rest.jaxrs.model.Titles convertTitle(Title title) {
     return new org.folio.rest.jaxrs.model.Titles()
       .withId(String.valueOf(title.getTitleId()))
-      .withRelationships(EMPTY_PACKAGE_RELATIONSHIP)
+      .withRelationships(EMPTY_RESOURCES_RELATIONSHIP)
       .withType("titles")
       .withAttributes(new TitleListDataAttributes()
         .withName(title.getTitleName())

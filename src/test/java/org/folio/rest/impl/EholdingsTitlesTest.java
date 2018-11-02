@@ -70,7 +70,7 @@ public class EholdingsTitlesTest {
   }
 
   @Test
-  public void shouldReturnProvidersOnGet() throws IOException, URISyntaxException {
+  public void shouldReturnTitlesOnGet() throws IOException, URISyntaxException {
     String stubResponseFile = "responses/rmapi/titles/searchTitles.json";
 
     String wiremockUrl = host + ":" + userMockServer.port();
@@ -90,7 +90,7 @@ public class EholdingsTitlesTest {
       .then()
       .statusCode(200)
 
-      .body("meta.totalResults" , equalTo(8766))
+      .body("meta.totalResults", equalTo(8766))
       .body("data[0].type", equalTo("titles"))
       .body("data[0].id", equalTo("1175655"))
       .body("data[0].attributes.name", equalTo("The $1 Million Reason to Change Your Mind"))
