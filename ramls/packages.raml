@@ -54,8 +54,10 @@ types:
       filter[custom]:
         displayName: Custom Packages List
         type: string
-        enum: ["true"]
-        description: Filter to get list of custom packages
+        description: |
+          Filter to get list of custom packages
+          Possible values are
+            - true
         example: "true"
         required: false
     responses:
@@ -129,8 +131,11 @@ types:
         include:
           displayName: Nested resources or provider
           type: string
-          enum: ["resources", "provider"]
-          description: Include resources or provider in response
+          description: |
+            Include resources or provider in response
+            Possible values are
+              - resources
+              - provider
           example: resources
           required: false
       responses:
