@@ -45,6 +45,8 @@ types:
 #        "id": "EZ_Proxy"
 #      }
   packageCollection: !include types/packages/packageCollection.json
+  packagePostRequest: !include types/packages/packagePostRequest.json
+  package: !include types/packages/package.json
   jsonapiError: !include types/jsonapiError.json
 
 /eholdings/packages:
@@ -90,45 +92,37 @@ types:
         example: application/vnd.api+json
     body:
       application/vnd.api+json:
-        properties:
-          data:
-            description: Needed because of JSON API
-            type: object
-            required: true
-            properties:
-              type: string
-              attributes:
-                description: Needed because of JSON API
-                type: object
-                required: true
-                properties:
-                  name:
-                    description: Name of the custom package to be created
-                    type: string
-                    example: My test package
-                    required: true
-                  contentType:
-                    description: Content type of the custom package to be created
-                    type: string
-                    enum: ["Aggregated Full Text", "Abstract and Index", "E-Book", "E-Journal", "Print", "Online Reference", "Unknown"]
-                    example: Unknown
-                    required: true
-                  customCoverage:
-                    description: Coverage dates of the custom package to be created
-                    type: customCoverage
-                    required: false
-        example: !include examples/packages/packages_post_request.json
+          description: Create a custom package
+          type: packagePostRequest
+          example:
+            strict: false
+            value: !include examples/packages/packages_post_request.json
     responses:
       200:
         description: OK
         body:
           application/vnd.api+json:
-            example: !include examples/packages/packages_post_200_response.json
+            description: The server has successfully fulfilled the POST request.
+            type: package
+            example:
+              strict: false
+              value: !include examples/packages/packages_post_200_response.json
       400:
         description: Bad Request
         body:
           application/vnd.api+json:
-              example: !include examples/packages/packages_post_400_response.json
+            type: jsonapiError
+            example:
+              strict: false
+              value: !include examples/packages/packages_post_400_response.json
+      422:
+        description: Unprocessable Entity
+        body:
+          application/vnd.api+json:
+            type: jsonapiError
+            example:
+              strict: false
+              value: !include examples/packages/packages_post_422_response.json
   /{packageId}:
     uriParameters:
         packageId:
