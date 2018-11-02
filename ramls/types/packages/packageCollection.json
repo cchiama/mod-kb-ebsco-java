@@ -11,7 +11,7 @@
       "description": "List of packages",
       "items": {
         "type": "object",
-        "$ref": "packages.json"
+        "$ref": "packageCollectionItem.json"
       }
     },
     "meta": {

@@ -44,6 +44,8 @@ types:
 #      {
 #        "id": "EZ_Proxy"
 #      }
+  packageCollection: !include types/packages/packageCollection.json
+  jsonapiError: !include types/jsonapiError.json
 
 /eholdings/packages:
   displayName: Packages
@@ -65,12 +67,22 @@ types:
         description: OK
         body:
           application/vnd.api+json:
-            example: !include examples/packages/packages_get_200_response.json
+            description: |
+              An array of packages comprising the results of the query.
+              The array will be paged if its length exceeds the value set with the `count` query param, or the default `count` of 25 in its stead.
+              The included metadata gives us the total result count outside of the paged context.
+            type: packageCollection
+            example:
+              strict: false
+              value: !include examples/packages/packages_get_200_response.json
       400:
         description: Bad Request
         body:
           application/vnd.api+json:
-            example: !include examples/packages/packages_get_400_response.json
+            type: jsonapiError
+            example:
+              strict: false
+              value: !include examples/packages/packages_get_400_response.json
   post:
     description: Create a custom package
     headers:
